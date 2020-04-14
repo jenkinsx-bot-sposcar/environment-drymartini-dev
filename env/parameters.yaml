@@ -1,0 +1,10 @@
+adminUser:
+  password: vault:drymartini/adminUser:password
+  username: admin
+enableDocker: false
+pipelineUser:
+  email: jenkinsxio@gmail.com
+  token: vault:drymartini/pipelineUser:token
+  username: jenkinsx-bot-sposcar
+prow:
+  hmacToken: vault:drymartini/prow:hmacToken

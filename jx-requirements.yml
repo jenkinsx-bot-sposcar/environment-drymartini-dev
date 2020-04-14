@@ -1,39 +1,87 @@
 autoUpdate:
   enabled: false
   schedule: ""
+bootConfigURL: https://github.com/cloudbees/cloudbees-jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
+  clusterName: drymartini
+  devEnvApprovers:
+  - sharepointoscar
+  environmentGitOwner: jenkins-oscar
   environmentGitPublic: true
-  project: ""
-  azure: {}
-  provider: gke
-  zone: ""
-gitops: true
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  provider: eks
+  region: us-west-2
+  registry: 653931956080.dkr.ecr.us-west-2.amazonaws.com
 environments:
-  - key: dev
-  - key: staging
-  - key: production
+- ingress:
+    domain: jx.eks.sharepointoscar.com
+    externalDNS: true
+    ignoreLoadBalancer: true
+    namespaceSubDomain: -jx.
+    tls:
+      email: me@sharepointoscar.com
+      enabled: true
+      production: true
+  key: dev
+  repository: environment-drymartini-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-drymartini-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-drymartini-production
+gitops: true
 ingress:
-  domain: ""
-  externalDNS: false
+  domain: jx.eks.sharepointoscar.com
+  externalDNS: true
+  ignoreLoadBalancer: true
+  namespaceSubDomain: -jx.
   tls:
-    email: ""
-    enabled: false
-    production: false
+    email: me@sharepointoscar.com
+    enabled: true
+    production: true
 kaniko: true
+repository: nexus
 secretStorage: vault
 storage:
+  backup:
+    enabled: false
+    url: ""
   logs:
     enabled: true
-    url: ""
+    url: s3://drymartini-logs-d3734ff4-bf2b-4f09-ab89-c8a711194b64
   reports:
     enabled: true
-    url: ""
+    url: s3://drymartini-reports-2c4a54e6-eb54-4301-9e2c-7dd2797ce51e
   repository:
     enabled: true
-    url: ""
+    url: s3://drymartini-repository-b760f615-342e-4230-b8ea-36942a27e018
+vault:
+  aws:
+    autoCreate: true
+    iamUserName: aws_admin@sharepointoscar.com
+  disableURLDiscovery: true
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: 2.0.1245+cjxd.8
+  ref: v0.0.29
   url: https://github.com/cloudbees/cloudbees-jenkins-x-versions.git
 webhook: prow
