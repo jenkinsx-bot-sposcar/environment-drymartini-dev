@@ -1,0 +1,21 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: jenkins-oscar
+    provider: github
+    repository: carsweb
+  name: jenkins-oscar-carsweb
+spec:
+  description: Imported application for jenkins-oscar/carsweb
+  httpCloneURL: https://github.com/jenkins-oscar/carsweb.git
+  org: jenkins-oscar
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: carsweb
+  scheduler:
+    kind: ""
+    name: ""
+  url: https://github.com/jenkins-oscar/carsweb.git
